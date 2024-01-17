@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PT from 'prop-types'
 import axios from 'axios'
+import ArticleForm from './ArticleForm'
 
 const articlesUrl = 'http://localhost:9000/api/articles'
 
@@ -10,10 +11,9 @@ export default function Articles({
   getArticles,
   deleteArticle,
   setCurrentArticleId,
-  currentArticleId,
-  updateArticle
+  setCurrentArticle
 }) {
-  const [currentArticle, setCurrentArticle] = useState(null)
+
   const navigate = useNavigate()
   const redirectToLogin = () => navigate('/');
   useEffect(() => {
@@ -29,17 +29,18 @@ export default function Articles({
   // we should render a Navigate to login screen (React Router v.6)
 
   const handleEdit = (article_id) => {
-    setCurrentArticleId(article_id);
-    console.log('currentArticleId:', article_id);
-
-    const selectedArticle = articles.find(article => article.article_id === article_id);
-    console.log('selectedArticle:', selectedArticle);
-
-    setCurrentArticle(selectedArticle);
-    console.log('currentArticle:', currentArticle);
-    
-    navigate('/articles');
+    const articleToEdit = articles.find((article) => article.article_id === article_id);
+    if (articleToEdit) {
+      console.log('you clicked the edit button')
+      setCurrentArticle(articleToEdit);
+      setCurrentArticleId(article_id);
+      // setCurrentArticleId(null);
+    } else {
+      console.error(`Article with ID ${article_id} not found`);
+    }
   };
+
+
 
   return (
     // ✨ fix the JSX: replace `Function.prototype` with actual functions

@@ -15,6 +15,7 @@ export default function App() {
   const [message, setMessage] = useState('')
   const [articles, setArticles] = useState([])
   const [currentArticleId, setCurrentArticleId] = useState()
+  const [currentArticle, setCurrentArticle] = useState()
   const [spinnerOn, setSpinnerOn] = useState(false)
 
   // ✨ Research `useNavigate` in React Router v.6
@@ -184,13 +185,16 @@ export default function App() {
                 updateArticle={updateArticle}
                 setCurrentArticleId={setCurrentArticleId}
                 currentArticleId={currentArticleId}
+                currentArticle={currentArticle}
+                setCurrentArticle={setCurrentArticle}
               />
               <Articles
                 articles={articles}
                 getArticles={getArticles}
                 deleteArticle={deleteArticle}
                 setCurrentArticleId={setCurrentArticleId}
-                currentArticleId={currentArticleId}
+                currentArticle={currentArticle}
+                setCurrentArticle={setCurrentArticle}
               />
             </>
           } />
